@@ -543,33 +543,6 @@ flowchart TB
     HEADER --> C7
 ```
 
----
-
-## 📁 File Structure
-
-```
-src/
-├── components/
-│   ├── common/          # Button, Card, Modal, Badge, DataTable
-│   ├── layout/          # Sidebar, Header, MainLayout
-│   ├── dashboard/       # StatusCards, Charts, Alerts
-│   ├── inventory/       # ItemCard, StockHistory, BatchList
-│   ├── service/         # ServiceForm, StatusTimeline, PartSelector
-│   ├── customers/       # CustomerCard, HistoryList
-│   ├── pos/             # Cart, ProductGrid, BatchSelector, PaymentModal
-│   └── reports/         # ChartComponents, Tables
-├── pages/               # Dashboard, Inventory, Service, Customers, POS, Reports
-├── context/             # ThemeContext, AppContext
-├── hooks/               # useTheme, useLocalStorage
-├── styles/
-│   ├── index.css
-│   └── variables.css
-├── utils/               # Helpers, formatters
-├── App.jsx
-└── main.jsx
-```
-
----
 
 ## 📱 Responsive Behavior
 
@@ -580,38 +553,3 @@ src/
 | **Mobile (< 768px)** | Bottom navigation bar, single column |
 
 ---
-
-## 🖼️ Visual Mockups
-
-````carousel
-![Dashboard Overview](C:/Users/Good/.gemini/antigravity/brain/23ea58ac-0e2d-46bd-b5d7-312090ca071c/dashboard_overview_mockup_1767002592488.png)
-<!-- slide -->
-![Service Tracking](C:/Users/Good/.gemini/antigravity/brain/23ea58ac-0e2d-46bd-b5d7-312090ca071c/service_tracking_mockup_1767002635654.png)
-<!-- slide -->
-![Inventory Management](C:/Users/Good/.gemini/antigravity/brain/23ea58ac-0e2d-46bd-b5d7-312090ca071c/inventory_management_mockup_1767002659910.png)
-````
-
----
-
-## ⚙️ Tech Stack
-
-| Layer | Technology |
-|-------|------------|
-| Framework | React 18 + Vite |
-| Routing | React Router v6 |
-| State | React Context + useReducer |
-| Styling | Vanilla CSS + CSS Variables |
-| Icons | Lucide React |
-| Charts | Recharts |
-| Notifications | React Hot Toast |
-
----
-
-## ✅ User Decisions (Approved)
-
-| Item | Decision |
-|------|----------|
-| Theme | Dark mode default, with toggle (follows system preference) |
-| Sidebar Order | Approved as proposed |
-| Barcode Scanner | Deferred to Phase 2 |
-| Additional Features | None needed for Phase 1 |
