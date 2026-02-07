@@ -1,0 +1,62 @@
+Frontend Architecture Recommendation
+Module Complexity Analysis
+I've scanned the entire authenticated route structure to recommend the appropriate architecture for each module.
+
+Module	Complexity	Status	Recommendation
+Inventory	🔴 High	Mixed	Full Structure. products, 
+suppliers
+, opname are complex. products needs immediate refactoring (components in routes).
+Sales	🟡 Medium	Partial	Standard Structure. purchases is well-structured. customers needs controller extraction.
+Service	🔴 High	Legacy	Full Structure. 
+devices/+page.svelte
+ is 100KB (monolithic). Needs urgent breakdown into components + controllers. service/new also complex.
+Finance	🟡 Medium	Legacy	Standard Structure. 
+accounting/+page.svelte
+ is 29KB. Needs controller extraction.
+Settings	🟢 Low	Simple	Simple Structure. Keep as-is (inline logic/service calls) unless it grows.
+Recommended Enterprise Structure
+src/
+├── lib/
+│   ├── features/                    # Domain modules
+│   │   ├── inventory/
+│   │   │   ├── products/            # 🔴 Complex Feature
+│   │   │   │   ├── components/      # UI components (view-only)
+│   │   │   │   ├── controllers/     # State + business logic
+│   │   │   │   ├── products.service.ts
+│   │   │   │   └── index.ts
+│   │   │   └── ...
+│   │   ├── service/                 # 🔴 Complex Feature
+│   │   │   ├── devices/
+│   │   │   │   ├── components/
+│   │   │   │   ├── controllers/
+│   │   │   │   └── devices.service.ts
+│   │   │   └── ...
+│   │   ├── finance/                 # 🟡 Medium Feature
+│   │   │   ├── accounting/
+│   │   │   │   ├── accounting.controller.svelte.ts
+│   │   │   │   └── accounting.service.ts
+│   │   │   └── ...
+│   │
+│   └── shared/                      # Shared utilities
+│
+├── routes/                          # ✨ View-only routes
+│   └── (authenticated)/
+│       ├── (inventory)/...
+│       ├── (service)/...
+│       └── ...
+Refactoring Roadmap
+Priority 1: High Complexity & Technical Debt
+Inventory/Products: Move components from routes to lib, extract controllers.
+Service/Devices: Break down 100KB monolith into components + controller.
+Priority 2: Standardization
+Sales: Ensure all pages use controllers (already started).
+Finance: Extract logic from 
+accounting/+page.svelte
+.
+Priority 3: Maintenance
+Settings: No immediate changes needed.
+Key Takeaway
+You do NOT need to over-engineer simple pages.
+
+If a page is just "View List" + "Delete Item", a simple Service call or a lightweight single-file Controller is fine.
+Full Structure (components/ + controllers/) is reserved for complex features like Products, POS, Device Management, etc.
